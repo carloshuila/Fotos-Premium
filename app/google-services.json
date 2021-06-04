@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "863812676961",
+    "project_id": "fotospremium",
+    "storage_bucket": "fotospremium.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863812676961:android:6d149c8f8482b4238a2920",
+        "android_client_info": {
+          "package_name": "app.fotoschicas.premium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863812676961-t1fia3bgg93vcsfa1c94vmim3lbue1as.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiGsx9swaveDZFAorS9xSE6bhR6G7-sBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863812676961-t1fia3bgg93vcsfa1c94vmim3lbue1as.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
