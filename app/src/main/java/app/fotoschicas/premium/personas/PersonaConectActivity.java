@@ -2,6 +2,7 @@ package app.fotoschicas.premium.personas;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,7 +65,7 @@ public class PersonaConectActivity extends AppCompatActivity {
 
 
         //Barra superior
-    /*    //boton atras
+       //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -73,6 +74,7 @@ public class PersonaConectActivity extends AppCompatActivity {
                                         }
                                     }
         );
+        /*
         BottomNavigationView navBar = findViewById(btnBarraNav);
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
