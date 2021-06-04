@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import app.fotoschicas.premium.R;
-import app.fotoschicas.premium.personas.PersonaActivity;
+import app.fotoschicas.premium.personas.ListarPersonaActivity;
 import app.fotoschicas.premium.personas.PersonaConectActivity;
 
 public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyViewHolder> {
@@ -58,7 +58,7 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
                     micontext.startActivity(intent);
                 }
                 else{
-                    Intent intent = new Intent(micontext, PersonaActivity.class);
+                    Intent intent = new Intent(micontext, ListarPersonaActivity.class);
                     //--------Iniciamos la Activity PostresActivity
                     micontext.startActivity(intent);
 

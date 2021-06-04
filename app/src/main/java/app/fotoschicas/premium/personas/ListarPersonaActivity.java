@@ -21,7 +21,7 @@ import java.util.List;
 
 import app.fotoschicas.premium.R;
 
-public class PersonaActivity extends AppCompatActivity {
+public class ListarPersonaActivity extends AppCompatActivity {
 
     List<Persona> listaPersonas = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();

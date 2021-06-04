@@ -1,6 +1,5 @@
 package app.fotoschicas.premium;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,11 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +20,7 @@ import app.fotoschicas.premium.categorias.AdapterCategoria;
 import app.fotoschicas.premium.categorias.AdapterRecomendado;
 import app.fotoschicas.premium.categorias.Categoria;
 import app.fotoschicas.premium.personas.Persona;
-import app.fotoschicas.premium.personas.PersonaActivity;
+import app.fotoschicas.premium.personas.ListarPersonaActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -120,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void vercategorias(View view) {
-        Intent intent = new Intent(this, PersonaActivity.class);
+        Intent intent = new Intent(this, ListarPersonaActivity.class);
         startActivity(intent);
     }
 

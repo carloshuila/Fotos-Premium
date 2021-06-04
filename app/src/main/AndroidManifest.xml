@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".personas.PersonaActivity" />
+        <activity android:name=".personas.ListarPersonaActivity" />
         <activity android:name=".personas.PersonaConectActivity" />
     </application>
 

@@ -3,6 +3,7 @@ package app.fotoschicas.premium.categorias;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class AdapterRecomendado extends RecyclerView.Adapter<AdapterRecomendado.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-        holder.nombrePersona.setText((listapersonas.get(position).getNombre()));
+       // holder.nombrePersona.setText((listapersonas.get(position).getNombre()));
         Glide.with(micontext).load(listapersonas.get(position).getImagen()).into(holder.imgPersona);
 
         final Persona persona = listapersonas.get(position);
@@ -57,7 +58,8 @@ public class AdapterRecomendado extends RecyclerView.Adapter<AdapterRecomendado.
 
             Intent intent = new Intent(micontext, PersonaConectActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("Persona", persona);
+            bundle.putSerializable("persona", persona);
+            Log.d("NombreeeeeeRecoendado",persona.getNombre().toString() );
 
             //pasamos el objeto a la activity
             intent.putExtras(bundle);
@@ -74,7 +76,7 @@ public class AdapterRecomendado extends RecyclerView.Adapter<AdapterRecomendado.
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView nombrePersona;
+        //TextView nombrePersona;
         ImageView imgPersona;
         CardView cardViewRecomendado;
 
@@ -82,7 +84,7 @@ public class AdapterRecomendado extends RecyclerView.Adapter<AdapterRecomendado.
         public MyViewHolder(View itemView){
             super(itemView);
 
-            nombrePersona = (TextView) itemView.findViewById(R.id.id_recomendado_nombre);
+           // nombrePersona = (TextView) itemView.findViewById(R.id.id_recomendado_nombre);
             imgPersona  = (ImageView) itemView.findViewById(R.id.id_recomendado_img);
             cardViewRecomendado = (CardView) itemView.findViewById(R.id.id_cardViewRecomendado);
         }
