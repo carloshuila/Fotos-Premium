@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.fotoschicas.premium.categorias.AdapterCategoria;
-import app.fotoschicas.premium.categorias.AdapterRecomendado;
+import app.fotoschicas.premium.recomendado.AdapterRecomendado;
 import app.fotoschicas.premium.categorias.Categoria;
 import app.fotoschicas.premium.personas.Persona;
 import app.fotoschicas.premium.personas.ListarPersonaActivity;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d("entro","entrooo");
                                 Categoria categoria = document.toObject(Categoria.class);
                                 listaCategorias.add(categoria);
-                              EnviarListarRecyclerView(listaCategorias);
+                              EnviarListarRecyclerView_CategoriasHome(listaCategorias);
                             }
                         } else {
                             Log.w("Error", "Erroooooor getting documents.", task.getException());
@@ -121,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void  EnviarListarRecyclerView( List<Categoria> misCategorias){
+    public void EnviarListarRecyclerView_CategoriasHome(List<Categoria> misCategorias){
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerView_Categorias);
+        RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerView_Home_Categorias);
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setHasFixedSize(true);
         AdapterCategoria MyAdapter = new AdapterCategoria(this,misCategorias);

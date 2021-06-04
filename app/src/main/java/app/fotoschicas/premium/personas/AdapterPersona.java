@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -17,11 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.Serializable;
 import java.util.List;
 
 import app.fotoschicas.premium.R;
-import app.fotoschicas.premium.categorias.AdapterCategoria;
 
 public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHolder> {
 
@@ -40,7 +37,7 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHo
 
         View miview;
         LayoutInflater minflater = LayoutInflater.from(micontext);
-        miview = minflater.inflate(R.layout.cardview_item_persona,miparent,false);
+        miview = minflater.inflate(R.layout.cardview_item_listar_persona,miparent,false);
         return new MyViewHolder(miview);
     }
 

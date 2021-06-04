@@ -5,5 +5,6 @@
 
     <string name="NuestrasCategorias">Categorias</string>
     <string name="FotosRecomendadas">Fotos Recomendadas</string>
-    <string name="Personas">Modelos</string>
+    <string name="TituloBarraLista">Modelos</string>
+    <string name="TituloBarraCategorias">Categorias</string>
 </resources>

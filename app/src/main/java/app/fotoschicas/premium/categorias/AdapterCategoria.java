@@ -18,8 +18,6 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import app.fotoschicas.premium.R;
-import app.fotoschicas.premium.personas.ListarPersonaActivity;
-import app.fotoschicas.premium.personas.PersonaConectActivity;
 
 public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyViewHolder> {
 
@@ -36,7 +34,7 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
 
         View miview;
         LayoutInflater minflater = LayoutInflater.from(micontext);
-        miview = minflater.inflate(R.layout.cardview_item_categorias,miparent,false);
+        miview = minflater.inflate(R.layout.cardview_item_home_categorias,miparent,false);
         return new AdapterCategoria.MyViewHolder(miview);
     }
 
@@ -52,13 +50,13 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
             public void onClick(View v) {
                 Log.d("nombre categoriaaaa",listaCategorias.get(position).nombre );
                 if(listaCategorias.get(position).nombre == "Latinas"){
-                    Intent intent = new Intent(micontext, PersonaConectActivity.class);
+                    Intent intent = new Intent(micontext, ListarCategoriasActivity .class);
                     Log.d("entroooo", "entrroooo");
                     //--------Iniciamos la Activity PostresActivity
                     micontext.startActivity(intent);
                 }
                 else{
-                    Intent intent = new Intent(micontext, ListarPersonaActivity.class);
+                    Intent intent = new Intent(micontext, ListarCategoriasActivity .class);
                     //--------Iniciamos la Activity PostresActivity
                     micontext.startActivity(intent);
 
@@ -87,9 +85,9 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
         public MyViewHolder(View itemView){
             super(itemView);
 
-            nombreCategoria = (TextView) itemView.findViewById(R.id.id_categoria_nombre);
-            imgCategoria  = (ImageView) itemView.findViewById(R.id.id_categoria_img);
-            cardViewCategoria= (CardView) itemView.findViewById(R.id.id_cardViewCategoria);
+            nombreCategoria = (TextView) itemView.findViewById(R.id.id_nombre_categoria_home);
+            imgCategoria  = (ImageView) itemView.findViewById(R.id.id_img_categoria_home);
+            cardViewCategoria= (CardView) itemView.findViewById(R.id.id_cardView_CategoriaHome);
         }
     }
 }
