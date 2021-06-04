@@ -23,16 +23,7 @@
             android:background="@color/colorBlanco"
             android:scaleType="centerCrop"></ImageView>
 
-        <TextView
-            android:id="@+id/id_recomendado_nombre"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorCintaCard"
-            android:gravity="center"
-            android:text="Persona Nombre"
-            android:textColor="@color/colorPrimary"
-            android:textSize="15sp"
-            android:textStyle="bold"></TextView>
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
