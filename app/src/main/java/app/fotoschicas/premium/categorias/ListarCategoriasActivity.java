@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -19,6 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.fotoschicas.premium.MainActivity;
 import app.fotoschicas.premium.R;
 import app.fotoschicas.premium.personas.AdapterPersona;
 import app.fotoschicas.premium.personas.Persona;
@@ -44,31 +47,25 @@ public class ListarCategoriasActivity extends AppCompatActivity {
                                     }
         );
 
-   /*     //Barra navegacion
-        BottomNavigationView navBar = findViewById(btnBarraNav);
+       //Barra navegacion
+        BottomNavigationView navBar = findViewById(R.id.btnBarraNav);
+        navBar.setSelectedItemId(R.id.MainActivity);
 
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        navBar.setOnNavigationItemSelectedListener((item) -> {
                 switch (item.getItemId()){
                     case R.id.MainActivity:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.PedidosActivity:
-                        startActivity(new Intent(getApplicationContext(), PedidosActivity.class));
-                        overridePendingTransition(0,0);
+                    case R.id.CategoriasActivity:
                         return true;
-                    case R.id.PerfilActivity:
-                        startActivity(new Intent(getApplicationContext(), PerfilActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
+
                 }
                 return false;
-            }
+
         });
         //Fin barra navegacion
-*/
+
         db.collection("categorias")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

@@ -1,5 +1,6 @@
 package app.fotoschicas.premium;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.fotoschicas.premium.categorias.AdapterCategoria;
+import app.fotoschicas.premium.categorias.ListarCategoriasActivity;
 import app.fotoschicas.premium.recomendado.AdapterRecomendado;
 import app.fotoschicas.premium.categorias.Categoria;
 import app.fotoschicas.premium.personas.Persona;
@@ -72,47 +76,25 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
-
-
-
-
-        //Barra superior
-        //boton atras
-      /* btnAtras = (ImageButton) findViewById(R.id.btnAtras);
-        btnAtras.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            onBackPressed();
-                                        }
-                                    }
-        );
-        ./
-       */
-
         //Barra navegacion
-      /*  BottomNavigationView navBar = findViewById(btnBarraNav);
-
+        
+        BottomNavigationView navBar = findViewById(R.id.btnBarraNav);
         navBar.setSelectedItemId(R.id.MainActivity);
 
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        navBar.setOnNavigationItemSelectedListener((item) -> {
                 switch (item.getItemId()){
                     case R.id.MainActivity:
                         return true;
-                    case R.id.PedidosActivity:
-                        startActivity(new Intent(getApplicationContext(), PedidosActivity.class));
+                    case R.id.CategoriasActivity:
+                        startActivity(new Intent(getApplicationContext(), ListarCategoriasActivity.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.PerfilActivity:
-                        startActivity(new Intent(getApplicationContext(), PerfilActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
+
                 }
                 return false;
-            }
+
         });
-        */
+
     }
 
     public void vercategorias(View view) {

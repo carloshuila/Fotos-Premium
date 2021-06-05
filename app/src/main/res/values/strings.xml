@@ -7,4 +7,7 @@
     <string name="FotosRecomendadas">Fotos Recomendadas</string>
     <string name="TituloBarraLista">Modelos</string>
     <string name="TituloBarraCategorias">Categorias</string>
+    <string name="menu_Home">Inicio</string>
+    <string name="menu_Categorias">Categorias</string>
+    <string name="menu_Compartir">Compartir</string>
 </resources>
