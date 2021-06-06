@@ -6,103 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".categorias.ListarCategoriasActivity">
 
-    <!--- barra Atras-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contLayoutSuperior"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:background="@color/colorBlanco"
+    <!--- Toolbar-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_listarCategorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/btnAtras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorBlanco"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="?attr/actionModeCloseDrawable"
-            android:layout_marginLeft="10dp" />
-
         <TextView
-            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:foregroundGravity="center"
-            android:gravity="center_horizontal"
             android:text="@string/TituloBarraCategorias"
-            android:textAlignment="center"
-            android:textColor="@color/colorNegro"
-            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:id="@+id/toolbar_title" />
 
-
-        </TextView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--- fin barra Atras-->
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.761"
+    </androidx.appcompat.widget.Toolbar>
+    <ImageButton
+        android:id="@+id/btnAtras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contLayoutSuperior"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <!--- Fin Toolbar-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/id_recyclerView_listaCategorias"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp">
-            </androidx.recyclerview.widget.RecyclerView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contLayouyBarraNav"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
+    <!--- Barra Menu Inferior-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/btnBarraNav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:backgroundTint="@color/colorBlanco"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        app:menu="@menu/btn_nav_menu"
+        app:layout_constraintStart_toStartOf="parent" />
+    <!--- Fin Toolbar-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintVertical_bias="0.0"
+        android:id="@+id/id_recyclerView_listaCategorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:paddingBottom="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBarraNav"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_listarCategorias" />
 
-        app:layout_constraintVertical_bias="1.0">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/btnBarraNav"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:itemTextColor="@color/black"
-            app:labelVisibilityMode="auto"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:backgroundTint="@color/colorBlanco"
-            app:itemIconTint="@color/black"
-            app:menu="@menu/btn_nav_menu" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--- barra Atras-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contLayoutSuperior"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:background="@color/colorBlanco"
+    <!--- Toolbar-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_verPersona"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/btnAtras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorBlanco"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="?attr/actionModeCloseDrawable"
-            android:layout_marginLeft="10dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--- fin barra Atras-->
+    </androidx.appcompat.widget.Toolbar>
+    <ImageButton
+        android:id="@+id/btnAtras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+    <!--- Fin Toolbar-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contLayoutSuperior"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_verPersona"
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
@@ -49,8 +51,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--- fin barra Atras-->
-
-
 
 
 

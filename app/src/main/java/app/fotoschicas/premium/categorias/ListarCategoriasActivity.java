@@ -1,15 +1,21 @@
 package app.fotoschicas.premium.categorias;
 
+import android.content.ClipData;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,8 +29,6 @@ import java.util.List;
 
 import app.fotoschicas.premium.MainActivity;
 import app.fotoschicas.premium.R;
-import app.fotoschicas.premium.personas.AdapterPersona;
-import app.fotoschicas.premium.personas.Persona;
 
 public class ListarCategoriasActivity extends AppCompatActivity {
     List<Categoria> listaCategorias = new ArrayList<>();
@@ -36,7 +40,6 @@ public class ListarCategoriasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_categorias);
 
-        //Barra superior
         //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {
@@ -93,5 +96,6 @@ public class ListarCategoriasActivity extends AppCompatActivity {
             myRecyclerView.setAdapter(MyAdapter);
         }
 
-    }
+
+}
 
