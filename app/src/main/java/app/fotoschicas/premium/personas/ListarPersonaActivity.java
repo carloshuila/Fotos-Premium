@@ -27,6 +27,12 @@ public class ListarPersonaActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageButton btnAtras;
 
+
+    public ListarPersonaActivity(int contentLayoutId, List<Persona> listaPersonas) {
+        super(contentLayoutId);
+        this.listaPersonas = listaPersonas;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +81,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Personas", document.getId() + " => " + document.getData());
+                              //  Log.d("Personas", document.getId() + " => " + document.getData());
                                 Persona persona = document.toObject(Persona.class);
                                 listaPersonas.add(persona);
                                 EnviarListarRecyclerView(listaPersonas);

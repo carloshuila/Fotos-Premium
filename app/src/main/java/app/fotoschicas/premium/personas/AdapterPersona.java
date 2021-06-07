@@ -32,6 +32,14 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHo
         listapersonas = listaPersonas;
     }
 
+    public List<Persona> getListapersonas() {
+        return listapersonas;
+    }
+
+    public void setListapersonas(List<Persona> listapersonas) {
+        this.listapersonas = listapersonas;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup miparent, int viewType) {
 
@@ -57,7 +65,8 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHo
             Intent intent = new Intent(micontext, PersonaConectActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("persona", persona);
-            Log.d("Nombreeeeee",persona.getNombre().toString() );
+          //  Log.d("Nombreeeeee",persona.getNombre().toString() );
+           // Log.d("Nombreeeeee",persona.getCategoria().toString() );
 
             //pasamos el objeto a la activity
             intent.putExtras(bundle);

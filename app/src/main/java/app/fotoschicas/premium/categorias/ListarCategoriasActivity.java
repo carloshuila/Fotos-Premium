@@ -76,7 +76,7 @@ public class ListarCategoriasActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Categorias", document.getId() + " => " + document.getData());
+                               // Log.d("Categorias", document.getId() + " => " + document.getData());
                                 Categoria categoria = document.toObject(Categoria.class);
                                 listaCategorias.add(categoria);
                                 EnviarListarRecyclerView(listaCategorias);

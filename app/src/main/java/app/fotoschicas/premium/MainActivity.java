@@ -1,6 +1,5 @@
 package app.fotoschicas.premium;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -30,24 +28,27 @@ public class MainActivity extends AppCompatActivity {
 
     public List<Categoria> listaCategorias = new ArrayList<>();
     public List<Persona> listaRecomendados = new ArrayList<>();
+    public List<Persona> listaPersonas = new ArrayList<>();
+
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageButton btnAtras;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EnviarListarRecyclerView_CategoriasHome(listaCategorias);
+        EnviarListarRecyclerViewRecomendados(listaRecomendados);
 
-
-
-       db.collection("categorias")
+                db.collection("categorias")
                 .get()
                 .addOnCompleteListener(task ->  {
 
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("Categorias", document.getId() + " => " + document.getData());
-                                Log.d("entro","entrooo");
+                                Log.d("entro","entrooo  Homme Categorias");
                                 Categoria categoria = document.toObject(Categoria.class);
                                 listaCategorias.add(categoria);
                               EnviarListarRecyclerView_CategoriasHome(listaCategorias);
@@ -58,16 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
                 });
 
-        db.collection("personas")
+         db.collection("personas")
                 .get()
                 .addOnCompleteListener(task ->  {
 
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d("Personas", document.getId() + " => " + document.getData());
-                            Log.d("entro","entrooo");
+                            Log.d("entro","entrooo Home Recomendados");
                             Persona persona = document.toObject(Persona.class);
                             listaRecomendados.add(persona);
+                            listaPersonas.add(persona);
                             EnviarListarRecyclerViewRecomendados(listaRecomendados);
                         }
                     } else {
@@ -75,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 });
-
 
         //Barra navegacion
         

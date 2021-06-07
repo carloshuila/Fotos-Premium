@@ -18,8 +18,9 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import app.fotoschicas.premium.R;
+import app.fotoschicas.premium.personas.ListarPersonaActivity;
 
-    public class AdapterListarCategorias  extends RecyclerView.Adapter<AdapterListarCategorias.MyViewHolder> {
+public class AdapterListarCategorias  extends RecyclerView.Adapter<AdapterListarCategorias.MyViewHolder> {
 
         public Context micontext;
         public List<Categoria> listaCategorias;
@@ -47,19 +48,23 @@ import app.fotoschicas.premium.R;
             holder.cardViewCategoria.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("nombre categoriaaaa",listaCategorias.get(position).nombre );
-                    if(listaCategorias.get(position).nombre == "Latinas"){
-                        Intent intent = new Intent(micontext, ListarCategoriasActivity.class);
-                        Log.d("entroooo", "entrroooo");
+
+                    Log.d("entroooo pyebassss", "entrroooo puebaaa adapter listar categoria");
+
+                    //Log.d("nombre categoriaaaa",listaCategorias.get(position).nombre );
+                   /* if(listaCategorias.get(position).nombre == "Latinas"){
+                        Intent intent = new Intent(micontext, ListarPersonaActivity.class);
+                        Log.d("entroooo pyebassss", "entrroooo puebaaa adapter listar categoria");
                         //--------Iniciamos la Activity PostresActivity
                         micontext.startActivity(intent);
                     }
                     else{
                         Intent intent = new Intent(micontext, ListarCategoriasActivity .class);
+                        Log.d("entroooo pyebassss", "entrroooo puebaaa elseee adapter listar categoria");
                         //--------Iniciamos la Activity PostresActivity
                         micontext.startActivity(intent);
 
-                    }
+                    }*/
 
 
 

@@ -10,7 +10,7 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(String nombre, String imagen, String categoria) {
+    public Persona(String nombre,String categoria, String imagen ) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.categoria = categoria;
