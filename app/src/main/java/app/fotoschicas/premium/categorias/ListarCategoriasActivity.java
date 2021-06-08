@@ -39,7 +39,7 @@ public class ListarCategoriasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_categorias);
-
+        EnviarListarRecyclerView(listaCategorias);
         //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {

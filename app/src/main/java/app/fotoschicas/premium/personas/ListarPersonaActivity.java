@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,28 +29,43 @@ public class ListarPersonaActivity extends AppCompatActivity {
     private ImageButton btnAtras;
 
 
-    public ListarPersonaActivity(int contentLayoutId, List<Persona> listaPersonas) {
-        super(contentLayoutId);
-        this.listaPersonas = listaPersonas;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_personas);
-
-        //Barra superior
+        EnviarListarRecyclerView(listaPersonas);
         //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            onBackPressed();
-                                        }
-                                    }
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        }
         );
+        //Recibir datos
+        String  nombreCategoria = getIntent().getStringExtra("nombreCategoria");
+        Log.d("entroooo listar persona", nombreCategoria);
 
-   /*     //Barra navegacion
+        db.collection("personas").whereEqualTo("categoria", nombreCategoria )
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //  Log.d("Personas", document.getId() + " => " + document.getData());
+                                Persona persona = document.toObject(Persona.class);
+                                listaPersonas.add(persona);
+                                EnviarListarRecyclerView(listaPersonas);
+                            }
+                        } else {
+                            Log.w("Erorrrrr", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+   /*   //Barra navegacion
         BottomNavigationView navBar = findViewById(btnBarraNav);
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -74,23 +90,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
         });
         //Fin barra navegacion
 */
-        db.collection("personas")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                              //  Log.d("Personas", document.getId() + " => " + document.getData());
-                                Persona persona = document.toObject(Persona.class);
-                                listaPersonas.add(persona);
-                                EnviarListarRecyclerView(listaPersonas);
-                            }
-                        } else {
-                            Log.w("Erorrrrr", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+
 
 
     }

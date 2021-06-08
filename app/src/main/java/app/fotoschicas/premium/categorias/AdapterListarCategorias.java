@@ -51,6 +51,14 @@ public class AdapterListarCategorias  extends RecyclerView.Adapter<AdapterListar
 
                     Log.d("entroooo pyebassss", "entrroooo puebaaa adapter listar categoria");
 
+                    Log.d("nombre categoriaaaa",listaCategorias.get(position).nombre );
+                    final  String nombreCategoria = listaCategorias.get(position).nombre;
+
+                    Intent intent = new Intent(micontext, ListarPersonaActivity.class);
+                    intent.putExtra("nombreCategoria", nombreCategoria);
+                    //Iniciamos la Activity
+                    micontext.startActivity(intent);
+
                     //Log.d("nombre categoriaaaa",listaCategorias.get(position).nombre );
                    /* if(listaCategorias.get(position).nombre == "Latinas"){
                         Intent intent = new Intent(micontext, ListarPersonaActivity.class);

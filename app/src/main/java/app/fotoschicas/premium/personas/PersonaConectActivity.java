@@ -33,38 +33,15 @@ public class PersonaConectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_persona);
 
-        //tvNombre = (TextView) findViewById(R.id.id_nombre_persona_Act);
         ivImagen = (ImageView) findViewById(R.id.id_imagen_persona_Act);
-
         //Recibir datos
         Bundle personaEnviado = getIntent().getExtras();
         if (personaEnviado != null){
-           // Persona persona2 = new Persona("carlos", "https://fotosperros.es/wp-content/uploads/2021/05/Pomerania-2.jpg");
-
             persona = (Persona) personaEnviado.getSerializable("persona");
-          //  Log.d("Nombreeeeee",persona.getNombre().toString() );
-            //Pasa los valores para mostrar
-         //   tvNombre.setText(persona.getNombre().toString());
-
-
             Glide.with(this).load(persona.getImagen()).into(ivImagen);
 
+
         }
-     /*   // Obteber cantidad seleccionada
-        final ElegantNumberButton btnCantidad = (ElegantNumberButton) findViewById(R.id.btn_cantidad);
-        btnCantidad.setOnClickListener(new ElegantNumberButton.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                num= btnCantidad.getNumber();
-                Log.d("Cantidaddd", num);
-                cantidadTotal = (Integer.parseInt(num))*yogurt.getPrecio();
-                Log.d("PRECIOO",String.valueOf (cantidadTotal));
-                tvTotal.setText(String.valueOf(cantidadTotal));
-            }
-        });*/
-
-
-        //Barra superior
        //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {

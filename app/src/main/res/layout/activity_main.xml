@@ -89,8 +89,8 @@
     <LinearLayout
         android:id="@+id/contLayoutInformacion"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginBottom="150dp"
+        android:layout_height="330dp"
+        android:layout_marginBottom="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/contLayouyBarraNav"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,6 +98,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contLayoutFoto"
         app:layout_constraintVertical_bias="1.0">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/id_recyclerView_producto_recomendado"
             android:layout_width="match_parent"
