@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -23,7 +24,7 @@ import app.fotoschicas.premium.R;
 public class VerPersonaActivity extends AppCompatActivity {
 
     private TextView tvNombre;
-    private ImageView ivImagen;
+    private PhotoView ivImagen;
     private Context micontext;
 
     private ImageButton btnAtras;
@@ -62,7 +63,7 @@ public class VerPersonaActivity extends AppCompatActivity {
         mAdView2.loadAd(adRequest);
         //Fin API Goolge AdmOB
 
-        ivImagen = (ImageView) findViewById(R.id.id_imagen_persona_Act);
+        ivImagen = (PhotoView) findViewById(R.id.id_imagen_persona_Act);
         //Recibir datos
         Bundle personaEnviado = getIntent().getExtras();
         if (personaEnviado != null){

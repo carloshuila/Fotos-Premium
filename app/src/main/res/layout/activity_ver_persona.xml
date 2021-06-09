@@ -95,14 +95,14 @@
                     android:background="@color/white"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <com.github.chrisbanes.photoview.PhotoView
                         android:id="@+id/id_imagen_persona_Act"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/colorBlanco"
                         android:scaleType="center"
                         app:layout_constraintStart_toStartOf="parent">
-                    </ImageView>
+                    </com.github.chrisbanes.photoview.PhotoView>
                 </RelativeLayout>
             </LinearLayout>
 
