@@ -93,6 +93,13 @@ public class ListarCategoriasActivity extends AppCompatActivity {
                         return true;
                     case R.id.CategoriasActivity:
                         return true;
+                    case R.id.CompartirActivity:
+                        Intent intent = new Intent("android.intent.action.SEND");
+                        intent.putExtra("android.intent.extra.SUBJECT", this.getString(R.string.app_name));
+                        intent.putExtra("android.intent.extra.TEXT", this.getString(R.string.share_app_message) + ("\nhttps://play.google.com/store/apps/details?id=" + this.getPackageName()));
+                        intent.setType("text/plain");
+                        this.startActivity(Intent.createChooser(intent, "Compartir"));
+                        return true;
 
                 }
                 return false;
