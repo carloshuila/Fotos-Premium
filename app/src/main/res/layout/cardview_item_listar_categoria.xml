@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/id_cardView_ListarCategoria"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     app:cardCornerRadius="10dp"
@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/id_img_listar_categoria"
             android:layout_width="match_parent"
-            android:layout_height="225dp"
+            android:layout_height="125dp"
             android:scaleType="centerCrop"
             android:background="@color/colorBlanco">
         </ImageView>

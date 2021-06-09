@@ -10,11 +10,17 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import app.fotoschicas.premium.R;
 
-public class PersonaConectActivity extends AppCompatActivity {
+public class VerPersonaActivity extends AppCompatActivity {
 
     private TextView tvNombre;
     private ImageView ivImagen;
@@ -26,12 +32,35 @@ public class PersonaConectActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Persona persona = null;
     public  String num;
+    private AdView mAdView; //Google AdMob
+    private AdView mAdView2; //Google AdMob
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_persona);
+
+        //API Goolge AdmOB
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView = findViewById(R.id.ads_banner_verPersona1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+        AdView adView2 = new AdView(this);
+        adView2.setAdSize(AdSize.BANNER);
+        adView2.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView2 = findViewById(R.id.ads_banner_verPersona2);
+        mAdView2.loadAd(adRequest);
+        //Fin API Goolge AdmOB
 
         ivImagen = (ImageView) findViewById(R.id.id_imagen_persona_Act);
         //Recibir datos

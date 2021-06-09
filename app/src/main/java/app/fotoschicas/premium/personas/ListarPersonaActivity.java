@@ -1,7 +1,9 @@
 package app.fotoschicas.premium.personas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -11,8 +13,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -20,13 +29,17 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.fotoschicas.premium.MainActivity;
 import app.fotoschicas.premium.R;
+import app.fotoschicas.premium.categorias.ListarCategoriasActivity;
 
 public class ListarPersonaActivity extends AppCompatActivity {
 
     List<Persona> listaPersonas = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageButton btnAtras;
+    private AdView mAdView; //Google AdMob
+    private AdView mAdView2; //Google AdMob
 
 
     @Override
@@ -34,6 +47,31 @@ public class ListarPersonaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_personas);
         EnviarListarRecyclerView(listaPersonas);
+
+       //API Goolge AdmOB
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView = findViewById(R.id.ads_banner_personaLista1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+        AdView adView2 = new AdView(this);
+        adView2.setAdSize(AdSize.BANNER);
+        adView2.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView2 = findViewById(R.id.ads_banner_personaLista2);
+        mAdView2.loadAd(adRequest);
+        //Fin API Goolge AdMob
+
+
+
+
         //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {
@@ -65,31 +103,27 @@ public class ListarPersonaActivity extends AppCompatActivity {
                     }
                 });
 
-   /*   //Barra navegacion
-        BottomNavigationView navBar = findViewById(btnBarraNav);
+        //Barra navegacion
+        BottomNavigationView navBar = findViewById(R.id.btnBarraNav);
+        navBar.setSelectedItemId(R.id.MainActivity);
 
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.MainActivity:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.PedidosActivity:
-                        startActivity(new Intent(getApplicationContext(), PedidosActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.PerfilActivity:
-                        startActivity(new Intent(getApplicationContext(), PerfilActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
+        navBar.setOnNavigationItemSelectedListener((item) -> {
+            switch (item.getItemId()){
+                case R.id.MainActivity:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.CategoriasActivity:
+                    startActivity(new Intent(getApplicationContext(), ListarCategoriasActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
             }
+            return false;
+
         });
         //Fin barra navegacion
-*/
+
 
 
 
@@ -97,7 +131,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
     public void  EnviarListarRecyclerView( List<Persona> mispersonas){
         RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerView_persona);
         AdapterPersona MyAdapter = new AdapterPersona(this,mispersonas);
-        myRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        myRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
         myRecyclerView.setAdapter(MyAdapter);
     }
 }

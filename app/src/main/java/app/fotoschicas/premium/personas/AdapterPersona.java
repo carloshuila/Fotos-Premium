@@ -3,7 +3,6 @@ package app.fotoschicas.premium.personas;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +61,7 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHo
         //Agregar click Listener
         holder.cardViewPersona.setOnClickListener((v) -> {
 
-            Intent intent = new Intent(micontext, PersonaConectActivity.class);
+            Intent intent = new Intent(micontext, VerPersonaActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("persona", persona);
           //  Log.d("Nombreeeeee",persona.getNombre().toString() );

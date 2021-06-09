@@ -1,57 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/escritorio_verPersona"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:weightSum="2">
 
-    <!--- Toolbar-->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_verPersona"
+    <!--- Inicio Barra Toolbar-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </androidx.appcompat.widget.Toolbar>
-    <ImageButton
-        android:id="@+id/btnAtras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_verPersona"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TituloBarraVerPersona"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:id="@+id/toolbar_title" />
+            <ImageButton
+                android:id="@+id/btnAtras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="?attr/actionModeCloseDrawable" />
+        </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
     <!--- Fin Toolbar-->
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/contenedor_PrincipalPersona"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.761"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_verPersona"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:layout_weight="0"
+        android:isScrollContainer="true"
+        android:orientation="vertical"
+        android:scrollbars="horizontal">
 
-        <ImageView
-            android:id="@+id/id_imagen_persona_Act"
+        <LinearLayout
+            android:id="@+id/contenedor_princ_persona"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBlanco"
-            android:scaleType="center"
-            app:layout_constraintStart_toStartOf="parent">
-        </ImageView>
+            android:layout_weight="1"
+            android:isScrollContainer="true"
+            android:orientation="vertical"
+            android:scrollbars="horizontal">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--- fin barra Atras-->
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/ads_banner_verPersona1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    app:adSize="BANNER"
+                    app:adUnitId="@string/admob_banner_ad1" />
+            </RelativeLayout>
 
 
+            <LinearLayout
+                android:id="@+id/sun_contenedor_imgPersona"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp">
+                <RelativeLayout
+                    android:id="@+id/contenedor_verpersona"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/id_imagen_persona_Act"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorBlanco"
+                        android:scaleType="center"
+                        app:layout_constraintStart_toStartOf="parent">
+                    </ImageView>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/ads_banner_verPersona2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:adSize="BANNER"
+                app:adUnitId="@string/admob_banner_ad2" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

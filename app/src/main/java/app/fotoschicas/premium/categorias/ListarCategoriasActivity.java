@@ -17,6 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,12 +40,37 @@ public class ListarCategoriasActivity extends AppCompatActivity {
     List<Categoria> listaCategorias = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageButton btnAtras;
+    private AdView mAdView; //Google AdMob
+    private AdView mAdView2; //Google AdMob
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_categorias);
         EnviarListarRecyclerView(listaCategorias);
+
+        //API Goolge AdmOB
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView = findViewById(R.id.ads_banner_categoria1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+        AdView adView2 = new AdView(this);
+        adView2.setAdSize(AdSize.BANNER);
+        adView2.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView2 = findViewById(R.id.ads_banner_categoria2);
+        mAdView2.loadAd(adRequest);
+        //Fin API Goolge AdmOB
+
         //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +123,7 @@ public class ListarCategoriasActivity extends AppCompatActivity {
         public void  EnviarListarRecyclerView( List<Categoria> misCategorias){
             RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerView_listaCategorias);
             AdapterListarCategorias  MyAdapter = new AdapterListarCategorias (this,misCategorias);
-            myRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
+            myRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
             myRecyclerView.setAdapter(MyAdapter);
         }
 

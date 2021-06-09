@@ -1,141 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
+    android:weightSum="2"
     tools:context=".MainActivity">
 
-    <!--- Toolbar-->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_Home"
+    <!--- Inicio Barra Toolbar-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_Home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/TituloBarraHome"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:id="@+id/toolbar_title" />
+            </androidx.appcompat.widget.Toolbar>
+        </LinearLayout>
+        <!--- Fin Toolbar-->
+    <LinearLayout
+        android:id="@+id/categorias"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:layout_weight="0"
+        android:isScrollContainer="true"
+        android:orientation="vertical"
+        android:scrollbars="horizontal">
+        <LinearLayout
+            android:id="@+id/titulo_categoria"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/TituloBarraHome"
-            android:layout_gravity="center"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:id="@+id/toolbar_title" />
-    </androidx.appcompat.widget.Toolbar>
-    <!--- Fin Toolbar-->
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/NuestrasCategorias"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp">
+            </TextView>
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/contenerdor_lista_categoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+            <RelativeLayout
+                android:id="@+id/subContenerdor_lista_categoria"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-    <!--- caja fotos Categorias -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/id_recyclerView_Home_Categorias"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="-1dp">
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/NuestrasCategorias"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_Home" />
-
-    <LinearLayout
-        android:id="@+id/contLayoutFoto"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/id_recyclerView_Home_Categorias"
+        <LinearLayout
+            android:id="@+id/contenedor_lista_recomendados"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+            android:layout_weight="1"
+            android:isScrollContainer="true"
+            android:orientation="vertical"
+            android:scrollbars="horizontal">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp">
 
-    <!--- caja fotos recomendadas -->
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/ads_banner_home1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    app:adSize="BANNER"
+                    app:adUnitId="@string/admob_banner_ad1" />
+            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/titulo_recomendados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/FotosRecomendadas"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp">
+                </TextView>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/FotosRecomendadas"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/contLayoutInformacion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contLayoutFoto"
-        app:layout_constraintVertical_bias="0.0" />
+            <LinearLayout
+                android:id="@+id/sun_contenedor_recomendados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <RelativeLayout
+                    android:id="@+id/rvInsta"
+                    android:layout_width="0dp"
+                    android:layout_height="220dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/contLayoutInformacion"
-        android:layout_width="match_parent"
-        android:layout_height="330dp"
-        android:layout_marginBottom="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/contLayouyBarraNav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contLayoutFoto"
-        app:layout_constraintVertical_bias="1.0">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/id_recyclerView_producto_recomendado"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingTop="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="-1dp">
+                    </androidx.recyclerview.widget.RecyclerView>
+                </RelativeLayout>
+            </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/id_recyclerView_producto_recomendado"
+        </LinearLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="-1dp"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="50dp">
 
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/ads_banner_home2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:adSize="BANNER"
+                app:adUnitId="@string/admob_banner_ad2" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
 
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/btnBarraNav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemTextColor="@color/black"
+                app:labelVisibilityMode="auto"
+                app:backgroundTint="@color/white"
+                app:itemIconTint="@color/black"
+                app:menu="@menu/btn_nav_menu" />
+        </RelativeLayout>
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contLayouyBarraNav"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/btnBarraNav"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:itemTextColor="@color/black"
-            app:labelVisibilityMode="auto"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:backgroundTint="@color/white"
-            app:itemIconTint="@color/black"
-            app:menu="@menu/btn_nav_menu" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

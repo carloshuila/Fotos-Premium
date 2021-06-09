@@ -20,7 +20,7 @@ import java.util.List;
 
 import app.fotoschicas.premium.R;
 import app.fotoschicas.premium.personas.Persona;
-import app.fotoschicas.premium.personas.PersonaConectActivity;
+import app.fotoschicas.premium.personas.VerPersonaActivity;
 
 public class AdapterRecomendado extends RecyclerView.Adapter<AdapterRecomendado.MyViewHolder> {
 
@@ -54,7 +54,7 @@ public class AdapterRecomendado extends RecyclerView.Adapter<AdapterRecomendado.
         //Agregar click Listener
         holder.cardViewRecomendado.setOnClickListener(v -> {
 
-            Intent intent = new Intent(micontext, PersonaConectActivity.class);
+            Intent intent = new Intent(micontext, VerPersonaActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("persona", persona);
             Log.d("NombreeeeeeRecoendado",persona.getNombre().toString() );

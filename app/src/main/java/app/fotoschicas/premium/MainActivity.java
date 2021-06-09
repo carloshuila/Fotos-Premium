@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -23,12 +26,18 @@ import app.fotoschicas.premium.recomendado.AdapterRecomendado;
 import app.fotoschicas.premium.categorias.Categoria;
 import app.fotoschicas.premium.personas.Persona;
 import app.fotoschicas.premium.personas.ListarPersonaActivity;
+//API Goolge AdmOB
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class MainActivity extends AppCompatActivity {
 
     public List<Categoria> listaCategorias = new ArrayList<>();
     public List<Persona> listaRecomendados = new ArrayList<>();
     public List<Persona> listaPersonas = new ArrayList<>();
+    private AdView mAdView; //Google AdMob
+    private AdView mAdView2; //Google AdMob
 
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageButton btnAtras;
@@ -38,6 +47,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //API Goolge AdmOB
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView = findViewById(R.id.ads_banner_home1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        AdView adView2 = new AdView(this);
+        adView2.setAdSize(AdSize.BANNER);
+        adView2.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView2 = findViewById(R.id.ads_banner_home2);
+        mAdView2.loadAd(adRequest);
+        //Fin API Goolge AdmOB
+
         EnviarListarRecyclerView_CategoriasHome(listaCategorias);
         EnviarListarRecyclerViewRecomendados(listaRecomendados);
 
