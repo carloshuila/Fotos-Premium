@@ -1,13 +1,27 @@
 package app.fotoschicas.premium.personas;
 
+import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.URLUtil;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -19,6 +33,8 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
+
 import app.fotoschicas.premium.R;
 
 public class VerPersonaActivity extends AppCompatActivity {
@@ -26,8 +42,13 @@ public class VerPersonaActivity extends AppCompatActivity {
     private TextView tvNombre;
     private PhotoView ivImagen;
     private Context micontext;
-
+    private ImageButton btnDescargarImg;
     private ImageButton btnAtras;
+    private String url_Imagen;
+
+    private static final int REQUEST_CODE = 100;
+    String nombreImagen = "nombreImagen";
+
 
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -41,6 +62,7 @@ public class VerPersonaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_persona);
+        isStoragePermissionGranted();
 
         //API Goolge AdmOB
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -69,70 +91,73 @@ public class VerPersonaActivity extends AppCompatActivity {
         if (personaEnviado != null){
             persona = (Persona) personaEnviado.getSerializable("persona");
             Glide.with(this).load(persona.getImagen()).into(ivImagen);
-
+            url_Imagen = persona.getImagen();
+            nombreImagen = persona.getNombre();
 
         }
-       //boton atras
+
+        //boton descargar Imagen
+        btnDescargarImg = (ImageButton) findViewById(R.id.btn_descargar_img);
+        btnDescargarImg.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startDownload(url_Imagen);
+              // downloadImage22(url_Imagen,imageName);
+           }
+       });
+
+        //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            onBackPressed();
-                                        }
-                                    }
-        );
-        /*
-        BottomNavigationView navBar = findViewById(btnBarraNav);
-
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.MainActivity:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.PedidosActivity:
-                        startActivity(new Intent(getApplicationContext(), PedidosActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.PerfilActivity:
-                        startActivity(new Intent(getApplicationContext(), PerfilActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
-        */
-
     }
 
+    public void startDownload(String url_img) {
+        Toast makeText = Toast.makeText(this, "Iniciando Descarga", Toast.LENGTH_SHORT);
+        makeText.setGravity(Gravity.CENTER, 0, 0);
+        makeText.show();
 
-  /*  public void agregarCarrito(View view) {
-        Toast.makeText(this, "Se agrego un producto a tu pedido", LENGTH_SHORT).show();
-        // Create a new user with a first, middle, and last name
-        Map<String, Object> Pedido = new HashMap<>();
-        Pedido.put("id", yogurt.getId());
-        Pedido.put("nombre", yogurt.getNombre());
-        Pedido.put("precioTotal", cantidadTotal);
-        Pedido.put("cantidad", Integer.parseInt(num));
-        Pedido.put("imagen", yogurt.getImagen());
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_img));
+        request.setAllowedNetworkTypes(3);
+        request.setNotificationVisibility(1);
+        request.setTitle(nombreImagen+".png");
+        request.setVisibleInDownloadsUi(true);
 
-        // Add a new document with a generated ID
-        db.collection("pedidos")
-                .add(Pedido)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Pedidos", "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("ERRORRR", "Error adding document", e);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/FotosChicasPremium/" + nombreImagen+".png" );
+        ((DownloadManager) this.getSystemService(DOWNLOAD_SERVICE)).enqueue(request);
+        try {
+            if (Build.VERSION.SDK_INT >= 19) {
+                MediaScannerConnection.scanFile(this, new String[]{new File(Environment.DIRECTORY_DOWNLOADS + "/" + "/FotosChicasPremium/" +  nombreImagen+".png" ).getAbsolutePath()}, (String[]) null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String url_img, Uri uri) {
                     }
                 });
-    }*/
+                return;
+            }
+            this.sendBroadcast(new Intent("android.intent.action.MEDIA_MOUNTED", Uri.fromFile(new File(Environment.DIRECTORY_DOWNLOADS + "/" + "/FotosChicasPremium/" + nombreImagen+".png" ))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
 }

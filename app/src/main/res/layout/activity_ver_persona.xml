@@ -95,6 +95,7 @@
                     android:background="@color/white"
                     android:orientation="vertical">
 
+
                     <com.github.chrisbanes.photoview.PhotoView
                         android:id="@+id/id_imagen_persona_Act"
                         android:layout_width="match_parent"
@@ -102,9 +103,29 @@
                         android:background="@color/colorBlanco"
                         android:scaleType="center"
                         app:layout_constraintStart_toStartOf="parent">
+
+
                     </com.github.chrisbanes.photoview.PhotoView>
+
+                    <ImageButton
+                        android:id="@+id/btn_descargar_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="21dp"
+                        android:layout_marginRight="21dp"
+                        android:layout_marginBottom="6dp"
+                        app:srcCompat="@drawable/ic_descargar_img" />
+
+
                 </RelativeLayout>
             </LinearLayout>
+
+
 
         </LinearLayout>
         <RelativeLayout
