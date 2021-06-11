@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:scaleType="centerCrop"
-            android:background="@color/colorBlanco">
+            android:background="@color/color_blanco">
         </ImageView>
         <TextView
             android:id="@+id/id_nombre_categoria_home"
@@ -30,7 +30,7 @@
             android:textColor="@color/black"
             android:textSize="10sp"
             android:textStyle="bold"
-            android:background="@color/colorCintaCard"
+            android:background="@color/color_cinta_card"
             android:gravity="center">
         </TextView>
 

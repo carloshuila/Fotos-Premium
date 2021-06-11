@@ -20,17 +20,17 @@
             android:layout_width="match_parent"
             android:layout_height="125dp"
             android:scaleType="centerCrop"
-            android:background="@color/colorBlanco">
+            android:background="@color/color_blanco">
         </ImageView>
         <TextView
             android:id="@+id/id_nombre_listar_categoria"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Categoria Nombre"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/color_primary"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:background="@color/colorCintaCard"
+            android:background="@color/color_cinta_card"
             android:gravity="center">
         </TextView>
 

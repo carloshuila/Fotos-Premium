@@ -37,8 +37,11 @@ import android.widget.ImageButton;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.File;
@@ -60,6 +63,8 @@ import app.fotoschicas.premium.personas.ListarPersonaActivity;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.core.OrderBy;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     public List<Persona> listaPersonas = new ArrayList<>();
     private AdView mAdView; //Google AdMob
     private AdView mAdView2; //Google AdMob
+    private int numeroAleatorio;
 
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageButton btnAtras;
@@ -86,57 +92,49 @@ public class MainActivity extends AppCompatActivity {
 
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView.setAdUnitId(getResources().getString(R.string.admob_banner_ad1));
         mAdView = findViewById(R.id.ads_banner_home1);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         AdView adView2 = new AdView(this);
         adView2.setAdSize(AdSize.BANNER);
-        adView2.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView2.setAdUnitId(getResources().getString(R.string.admob_banner_ad2));
         mAdView2 = findViewById(R.id.ads_banner_home2);
         mAdView2.loadAd(adRequest);
         //Fin API Goolge AdmOB
 
         EnviarListarRecyclerView_CategoriasHome(listaCategorias);
         EnviarListarRecyclerViewRecomendados(listaRecomendados);
-
-                db.collection("categorias")
-                .get()
-                .addOnCompleteListener(task ->  {
-
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Categorias", document.getId() + " => " + document.getData());
-                                Log.d("entro","entrooo  Homme Categorias");
-                                Categoria categoria = document.toObject(Categoria.class);
-                                listaCategorias.add(categoria);
-                              EnviarListarRecyclerView_CategoriasHome(listaCategorias);
-                            }
-                        } else {
-                            Log.w("Error", "Erroooooor getting documents.", task.getException());
-                        }
-
-                });
-
-         db.collection("personas")
-                .get()
-                .addOnCompleteListener(task ->  {
-
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("Personas", document.getId() + " => " + document.getData());
-                            Log.d("entro","entrooo Home Recomendados");
-                            Persona persona = document.toObject(Persona.class);
-                            listaRecomendados.add(persona);
-                            listaPersonas.add(persona);
-                            EnviarListarRecyclerViewRecomendados(listaRecomendados);
-                        }
-                    } else {
-                        Log.w("Error", "Erroooooor getting documents.", task.getException());
-                    }
-
-                });
+        mostrarCategorias();
+        numeroAleatorio = (int) (Math.random()*6+1);
+        Log.w("aleatorioooo", Integer.toString(numeroAleatorio));
+        switch (numeroAleatorio){
+            case 1:
+                verPersonasCategoria(getResources().getString(R.string.categoria_1));
+                break;
+            case 2:
+                verPersonasCategoria(getResources().getString(R.string.categoria_2));
+                break;
+            case 3:
+                verPersonasCategoria(getResources().getString(R.string.categoria_3));
+                break;
+            case 4:
+                verPersonasCategoria(getResources().getString(R.string.categoria_4));
+                break;
+            case 5:
+                verPersonasCategoria(getResources().getString(R.string.categoria_5));
+                break;
+            case 6:
+                verPersonasCategoria(getResources().getString(R.string.categoria_6));
+                break;
+            case 7:
+                verPersonasTodas();
+                break;
+            default:
+                verPersonasTodas();
+                break;
+        }
 
         //Barra navegacion
         
@@ -187,6 +185,66 @@ public class MainActivity extends AppCompatActivity {
         myRecyclerView.setHasFixedSize(true);
         AdapterRecomendado MyAdapter = new AdapterRecomendado(this,misRecomendados);
         myRecyclerView.setAdapter(MyAdapter);
+    }
+
+    public void mostrarCategorias(){
+        db.collection("categorias")
+                .get()
+                .addOnCompleteListener(task ->  {
+
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d("Categorias", document.getId() + " => " + document.getData());
+                            Log.d("entro","entrooo  Homme Categorias");
+                            Categoria categoria = document.toObject(Categoria.class);
+                            listaCategorias.add(categoria);
+                            EnviarListarRecyclerView_CategoriasHome(listaCategorias);
+                        }
+                    } else {
+                        Log.w("Error", "Erroooooor getting documents.", task.getException());
+                    }
+
+                });
+    }
+
+    public void verPersonasTodas(){
+        db.collection("personas").limit(30)
+                .get()
+                .addOnCompleteListener(task ->  {
+
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d("Personas", document.getId() + " => " + document.getData());
+                            Log.d("entro","entrooo Home Recomendados");
+                            Persona persona = document.toObject(Persona.class);
+                            listaRecomendados.add(persona);
+                            EnviarListarRecyclerViewRecomendados(listaRecomendados);
+                        }
+                    } else {
+                        Log.w("Error", "Erroooooor getting documents.", task.getException());
+                    }
+
+                });
+    }
+
+    public void verPersonasCategoria(String nombre_categoria){
+        db.collection("personas").whereEqualTo("categoria", nombre_categoria).limit(30)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //  Log.d("Personas", document.getId() + " => " + document.getData());
+                                Persona persona = document.toObject(Persona.class);
+                                listaRecomendados.add(persona);
+                                EnviarListarRecyclerViewRecomendados(listaRecomendados);
+                            }
+                        } else {
+                            Log.w("Erorrrrr", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 
 }

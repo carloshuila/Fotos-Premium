@@ -4,16 +4,16 @@
     <item
         android:id="@+id/MainActivity"
         android:icon="@drawable/ic_home"
-        android:title="@string/menu_Home"/>
+        android:title="@string/menu_home"/>
 
     <item
         android:id="@+id/CategoriasActivity"
         android:icon="@drawable/ic_categorias"
-        android:title="@string/menu_Categorias"/>
+        android:title="@string/menu_categorias"/>
 
     <item
         android:id="@+id/CompartirActivity"
         android:icon="@drawable/ic_compartir"
-        android:title="@string/menu_Compartir"/>
+        android:title="@string/menu_compartir"/>
 
 </menu>

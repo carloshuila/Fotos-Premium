@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="color_primary">#90CAF9</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="purple_700">#090000</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorSplash">#FFFFFF</color>
-    <color name="colorBlanco">#FFFFFFFF</color>
-    <color name="colorNegro">#FF000000</color>
-    <color name="colorGris">#ECE9E9</color>
-    <color name="colorPrimary">#90CAF9</color>
-    <color name="colorCintaCard">#FFFFFF</color>
+    <color name="color_splash">#FFFFFF</color>
+    <color name="color_blanco">#FFFFFFFF</color>
+    <color name="color_negro">#FF000000</color>
+    <color name="color_gris">#ECE9E9</color>
+    <color name="color_cinta_card">#FFFFFF</color>
+    <color name="color_btn_descarga">#FF5722</color>
 </resources>

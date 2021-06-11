@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,12 +41,14 @@ public class ListarPersonaActivity extends AppCompatActivity {
     private ImageButton btnAtras;
     private AdView mAdView; //Google AdMob
     private AdView mAdView2; //Google AdMob
+    private TextView toolbar_title;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_personas);
+        toolbar_title=(TextView)findViewById(R.id.toolbar_title);
         EnviarListarRecyclerView(listaPersonas);
 
        //API Goolge AdmOB
@@ -56,7 +59,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
         });
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView.setAdUnitId(getResources().getString(R.string.admob_banner_ad1));
         mAdView = findViewById(R.id.ads_banner_personaLista1);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -64,7 +67,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
 
         AdView adView2 = new AdView(this);
         adView2.setAdSize(AdSize.BANNER);
-        adView2.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView2.setAdUnitId(getResources().getString(R.string.admob_banner_ad2));
         mAdView2 = findViewById(R.id.ads_banner_personaLista2);
         mAdView2.loadAd(adRequest);
         //Fin API Goolge AdMob
@@ -83,6 +86,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
         );
         //Recibir datos
         String  nombreCategoria = getIntent().getStringExtra("nombreCategoria");
+        toolbar_title.setText(nombreCategoria);
         Log.d("entroooo listar persona", nombreCategoria);
 
         db.collection("personas").whereEqualTo("categoria", nombreCategoria )

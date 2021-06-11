@@ -3,21 +3,30 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="NuestrasCategorias">Categorias</string>
+    <string name="nuestras_categorias">Categorias</string>
     <string name="share_app_message">Fotos Chicas Premium Mira Las Mejores Fotos De Mujeres Hermosas</string>
-    <string name="FotosRecomendadas">Fotos Recomendadas</string>
-    <string name="TituloBarraLista">Modelos</string>
-    <string name="TituloBarraVerPersona">Ver Modelos</string>
-    <string name="TituloBarraCategorias">Categorias</string>
-    <string name="TituloBarraHome">Fotos Chicas Premium</string>
-    <string name="menu_Home">Inicio</string>
-    <string name="menu_Categorias">Categorias</string>
-    <string name="menu_Compartir">Compartir</string>
+    <string name="fotos_recomendadas">Fotos Recomendadas</string>
+    <string name="titulo_barra_lista">Categoria</string>
+    <string name="titulo_barra_ver_persona">Ver Modelo</string>
+    <string name="titulo_barra_categorias">Categorias</string>
+    <string name="titulo_barra_home">Fotos Chicas Premium</string>
+    <string name="menu_home">Inicio</string>
+    <string name="menu_categorias">Categorias</string>
+    <string name="menu_compartir">Compartir</string>
+    <string name="categoria_1">Colombianas</string>
+    <string name="categoria_2">Latinas</string>
+    <string name="categoria_3">Rubias</string>
+    <string name="categoria_4">Mexicanas</string>
+    <string name="categoria_5">Asiáticas</string>
+    <string name="categoria_6">Famosas</string>
     <!-- API Google AdMob -->
     <string name="admob_app_id">ca-app-pub-2918954216814904~2881674747</string>
 
     <string name="admob_banner_ad1">ca-app-pub-3940256099942544/6300978111</string>
     <string name="admob_banner_ad2">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_interstitial_ad">ca-app-pub-3940256099942544/1033173712</string>
+
+
 
 
 </resources>

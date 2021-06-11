@@ -58,7 +58,7 @@ public class ListarCategoriasActivity extends AppCompatActivity {
         });
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView.setAdUnitId(getResources().getString(R.string.admob_banner_ad1));
         mAdView = findViewById(R.id.ads_banner_categoria1);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -66,7 +66,7 @@ public class ListarCategoriasActivity extends AppCompatActivity {
 
         AdView adView2 = new AdView(this);
         adView2.setAdSize(AdSize.BANNER);
-        adView2.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView2.setAdUnitId(getResources().getString(R.string.admob_banner_ad2));
         mAdView2 = findViewById(R.id.ads_banner_categoria2);
         mAdView2.loadAd(adRequest);
         //Fin API Goolge AdmOB

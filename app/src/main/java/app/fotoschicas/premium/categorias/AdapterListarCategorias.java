@@ -58,25 +58,6 @@ public class AdapterListarCategorias  extends RecyclerView.Adapter<AdapterListar
                     intent.putExtra("nombreCategoria", nombreCategoria);
                     //Iniciamos la Activity
                     micontext.startActivity(intent);
-
-                    //Log.d("nombre categoriaaaa",listaCategorias.get(position).nombre );
-                   /* if(listaCategorias.get(position).nombre == "Latinas"){
-                        Intent intent = new Intent(micontext, ListarPersonaActivity.class);
-                        Log.d("entroooo pyebassss", "entrroooo puebaaa adapter listar categoria");
-                        //--------Iniciamos la Activity PostresActivity
-                        micontext.startActivity(intent);
-                    }
-                    else{
-                        Intent intent = new Intent(micontext, ListarCategoriasActivity .class);
-                        Log.d("entroooo pyebassss", "entrroooo puebaaa elseee adapter listar categoria");
-                        //--------Iniciamos la Activity PostresActivity
-                        micontext.startActivity(intent);
-
-                    }*/
-
-
-
-
                 }
             });
 
