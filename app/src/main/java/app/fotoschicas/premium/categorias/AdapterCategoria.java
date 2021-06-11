@@ -27,10 +27,10 @@ import app.fotoschicas.premium.personas.Persona;
 public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyViewHolder> {
 
     public Context micontext;
-    private List<Categoria> listaCategorias = new ArrayList<>();
+    private ArrayList<Categoria> listaCategorias = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public AdapterCategoria(Context micontext, List<Categoria> listaCategorias) {
+    public AdapterCategoria(Context micontext, ArrayList<Categoria> listaCategorias) {
         this.micontext = micontext;
         this.listaCategorias = listaCategorias;
     }

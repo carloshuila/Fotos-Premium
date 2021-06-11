@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.textclassifier.TextLinks;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -126,20 +127,6 @@ public class VerPersonaActivity extends AppCompatActivity {
             }
         });
 
-        //boton descargar Imagen
-      /*  btnDescargarImg = (ImageButton) findViewById(R.id.btn_descargar_img);
-        btnDescargarImg.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               if (mInterstitialAd != null) {
-                   mInterstitialAd.show(VerPersonaActivity.this);
-               } else {
-                   Log.d("TAG", "The interstitial ad wasn't ready yet.");
-               }
-               startDownload(url_Imagen);
-           }
-       });
-*/
         //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +138,7 @@ public class VerPersonaActivity extends AppCompatActivity {
     }
 
     public void startDownload(String url_img) {
-        Toast makeText = Toast.makeText(this, "Iniciando Descarga", Toast.LENGTH_SHORT);
+        Toast makeText = Toast.makeText(this, getResources().getString(R.string.inicio_descarga), Toast.LENGTH_SHORT);
         makeText.setGravity(Gravity.CENTER, 0, 0);
         makeText.show();
 

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.fotoschicas.premium.R;
@@ -23,9 +24,9 @@ import app.fotoschicas.premium.personas.ListarPersonaActivity;
 public class AdapterListarCategorias  extends RecyclerView.Adapter<AdapterListarCategorias.MyViewHolder> {
 
         public Context micontext;
-        public List<Categoria> listaCategorias;
+        public ArrayList<Categoria> listaCategorias;
 
-        public AdapterListarCategorias(Context micontext, List<Categoria> listaCategorias) {
+        public AdapterListarCategorias(Context micontext, ArrayList<Categoria> listaCategorias) {
             this.micontext = micontext;
             this.listaCategorias = listaCategorias;
         }

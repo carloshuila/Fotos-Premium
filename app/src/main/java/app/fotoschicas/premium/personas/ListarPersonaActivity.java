@@ -36,7 +36,7 @@ import app.fotoschicas.premium.categorias.ListarCategoriasActivity;
 
 public class ListarPersonaActivity extends AppCompatActivity {
 
-    List<Persona> listaPersonas = new ArrayList<>();
+    ArrayList<Persona> listaPersonas = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageButton btnAtras;
     private AdView mAdView; //Google AdMob
@@ -87,6 +87,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
         //Recibir datos
         String  nombreCategoria = getIntent().getStringExtra("nombreCategoria");
         toolbar_title.setText(nombreCategoria);
+
         Log.d("entroooo listar persona", nombreCategoria);
 
         db.collection("personas").whereEqualTo("categoria", nombreCategoria )
@@ -126,7 +127,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
                     intent.putExtra("android.intent.extra.SUBJECT", this.getString(R.string.app_name));
                     intent.putExtra("android.intent.extra.TEXT", this.getString(R.string.share_app_message) + ("\nhttps://play.google.com/store/apps/details?id=" + this.getPackageName()));
                     intent.setType("text/plain");
-                    this.startActivity(Intent.createChooser(intent, "Compartir"));
+                    this.startActivity(Intent.createChooser(intent, getResources().getString(R.string.menu_compartir)));
                     return true;
 
             }
@@ -139,7 +140,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
 
 
     }
-    public void  EnviarListarRecyclerView( List<Persona> mispersonas){
+    public void  EnviarListarRecyclerView( ArrayList<Persona> mispersonas){
         RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerView_persona);
         AdapterPersona MyAdapter = new AdapterPersona(this,mispersonas);
         myRecyclerView.setLayoutManager(new GridLayoutManager(this,3));

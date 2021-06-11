@@ -27,10 +27,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Categoria Nombre"
-            android:textColor="@color/color_primary"
+            android:textColor="@color/color_text_carview_btn_descargar"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:background="@color/color_cinta_card"
+            android:background="@color/white"
             android:gravity="center">
         </TextView>
 

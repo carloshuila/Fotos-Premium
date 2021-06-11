@@ -37,7 +37,7 @@ import app.fotoschicas.premium.MainActivity;
 import app.fotoschicas.premium.R;
 
 public class ListarCategoriasActivity extends AppCompatActivity {
-    List<Categoria> listaCategorias = new ArrayList<>();
+    ArrayList<Categoria> listaCategorias = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageButton btnAtras;
     private AdView mAdView; //Google AdMob
@@ -98,7 +98,7 @@ public class ListarCategoriasActivity extends AppCompatActivity {
                         intent.putExtra("android.intent.extra.SUBJECT", this.getString(R.string.app_name));
                         intent.putExtra("android.intent.extra.TEXT", this.getString(R.string.share_app_message) + ("\nhttps://play.google.com/store/apps/details?id=" + this.getPackageName()));
                         intent.setType("text/plain");
-                        this.startActivity(Intent.createChooser(intent, "Compartir"));
+                        this.startActivity(Intent.createChooser(intent, getResources().getString(R.string.menu_compartir)));
                         return true;
 
                 }
@@ -127,7 +127,7 @@ public class ListarCategoriasActivity extends AppCompatActivity {
 
 
         }
-        public void  EnviarListarRecyclerView( List<Categoria> misCategorias){
+        public void  EnviarListarRecyclerView( ArrayList<Categoria> misCategorias){
             RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerView_listaCategorias);
             AdapterListarCategorias  MyAdapter = new AdapterListarCategorias (this,misCategorias);
             myRecyclerView.setLayoutManager(new GridLayoutManager(this,3));

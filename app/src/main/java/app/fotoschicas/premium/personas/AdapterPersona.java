@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.fotoschicas.premium.R;
@@ -22,11 +23,11 @@ import app.fotoschicas.premium.R;
 public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHolder> {
 
     private Context micontext;
-    private List<Persona> listapersonas;
+    private ArrayList<Persona> listapersonas;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-    public AdapterPersona(Context micontext, List<Persona> listaPersonas) {
+    public AdapterPersona(Context micontext, ArrayList<Persona> listaPersonas) {
         this.micontext = micontext;
         listapersonas = listaPersonas;
     }
@@ -35,7 +36,7 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHo
         return listapersonas;
     }
 
-    public void setListapersonas(List<Persona> listapersonas) {
+    public void setListapersonas(ArrayList<Persona> listapersonas) {
         this.listapersonas = listapersonas;
     }
 

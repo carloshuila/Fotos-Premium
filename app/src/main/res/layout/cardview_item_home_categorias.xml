@@ -30,7 +30,7 @@
             android:textColor="@color/black"
             android:textSize="10sp"
             android:textStyle="bold"
-            android:background="@color/color_cinta_card"
+            android:background="@color/white"
             android:gravity="center">
         </TextView>
 

@@ -52,6 +52,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import app.fotoschicas.premium.categorias.AdapterCategoria;
 import app.fotoschicas.premium.categorias.ListarCategoriasActivity;
@@ -68,9 +69,9 @@ import com.google.firebase.firestore.core.OrderBy;
 
 public class MainActivity extends AppCompatActivity {
 
-    public List<Categoria> listaCategorias = new ArrayList<>();
-    public List<Persona> listaRecomendados = new ArrayList<>();
-    public List<Persona> listaPersonas = new ArrayList<>();
+    public ArrayList<Categoria> listaCategorias = new ArrayList<>();
+    public ArrayList<Persona> listaRecomendados = new ArrayList<>();
+    public ArrayList<Persona> listaPersonas = new ArrayList<>();
     private AdView mAdView; //Google AdMob
     private AdView mAdView2; //Google AdMob
     private int numeroAleatorio;
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("android.intent.extra.SUBJECT", this.getString(R.string.app_name));
                         intent.putExtra("android.intent.extra.TEXT", this.getString(R.string.share_app_message) + ("\nhttps://play.google.com/store/apps/details?id=" + this.getPackageName()));
                         intent.setType("text/plain");
-                        this.startActivity(Intent.createChooser(intent, "Compartir"));
+                        this.startActivity(Intent.createChooser(intent, getResources().getString(R.string.menu_compartir)));
                         return true;
                     }
                 return false;
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void EnviarListarRecyclerView_CategoriasHome(List<Categoria> misCategorias){
+    public void EnviarListarRecyclerView_CategoriasHome(ArrayList<Categoria> misCategorias){
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerView_Home_Categorias);
         myRecyclerView.setLayoutManager(layoutManager);
@@ -178,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         myRecyclerView.setAdapter(MyAdapter);
     }
 
-    public void  EnviarListarRecyclerViewRecomendados( List<Persona> misRecomendados){
+    public void  EnviarListarRecyclerViewRecomendados( ArrayList<Persona> misRecomendados){
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerView_producto_recomendado);
         myRecyclerView.setLayoutManager(layoutManager);
