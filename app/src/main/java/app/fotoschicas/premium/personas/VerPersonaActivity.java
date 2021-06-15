@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.textclassifier.TextLinks;
+import android.webkit.CookieManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,12 +54,9 @@ public class VerPersonaActivity extends AppCompatActivity {
     private ImageButton btnAtras;
     private String url_Imagen;
 
-    private static final int REQUEST_CODE = 100;
-    String nombreImagen = "nombreImagen";
+    String nombreImagen;
 
-
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db;
     Persona persona = null;
     public  String num;
     private AdView mAdView; //Google AdMob
@@ -68,6 +66,8 @@ public class VerPersonaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        nombreImagen = "nombreImagen";
+        db  = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_ver_persona);
         toolbar_title=(TextView)findViewById(R.id.toolbar_title);
         isStoragePermissionGranted();
@@ -79,7 +79,7 @@ public class VerPersonaActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        //Banner Superios
+        //Banner Superior
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
         adView.setAdUnitId(getResources().getString(R.string.admob_banner_ad1));
@@ -94,7 +94,6 @@ public class VerPersonaActivity extends AppCompatActivity {
         mAdView2.loadAd(adRequest);
 
         anuncioIntersticial(adRequest);
-
         //Fin API Goolge AdmOB
 
         ivImagen = (PhotoView) findViewById(R.id.id_imagen_persona_Act);
@@ -107,10 +106,8 @@ public class VerPersonaActivity extends AppCompatActivity {
             nombreImagen = persona.getNombre();
             if(nombreImagen == null){
                 toolbar_title.setText(getResources().getString(R.string.titulo_barra_ver_persona));
-                Log.d("nombreNulooo", "nombre nuloooo");
             }else {
                 toolbar_title.setText(nombreImagen);
-                Log.d("no nombreNulooo", "nooo nombre nuloooo");
             }
 
         }
@@ -118,10 +115,8 @@ public class VerPersonaActivity extends AppCompatActivity {
         btnDescargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mInterstitialAd != null) {
+               if (mInterstitialAd != null) {
                     mInterstitialAd.show(VerPersonaActivity.this);
-                } else {
-                    Log.d("TAG", "The interstitial ad wasn't ready yet.");
                 }
                 startDownload(url_Imagen);
             }
@@ -138,16 +133,18 @@ public class VerPersonaActivity extends AppCompatActivity {
     }
 
     public void startDownload(String url_img) {
+        Toast Toast = new Toast(this);
         Toast makeText = Toast.makeText(this, getResources().getString(R.string.inicio_descarga), Toast.LENGTH_SHORT);
-        makeText.setGravity(Gravity.CENTER, 0, 0);
         makeText.show();
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url_img));
         request.setAllowedNetworkTypes(3);
         request.setNotificationVisibility(1);
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
         request.setTitle(nombreImagen+".png");
         request.setVisibleInDownloadsUi(true);
-
+        String cookie = CookieManager.getInstance().getCookie(url_img);
+        request.addRequestHeader("cookie", cookie);
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/Fotos Chicas Premium/" + nombreImagen+".png" );
         ((DownloadManager) this.getSystemService(DOWNLOAD_SERVICE)).enqueue(request);
@@ -176,7 +173,7 @@ public class VerPersonaActivity extends AppCompatActivity {
                 return false;
             }
         }
-        else { //permission is automatically granted on sdk<23 upon installation
+        else {
             return true;
         }
     }
@@ -185,39 +182,27 @@ public class VerPersonaActivity extends AppCompatActivity {
         InterstitialAd.load(this,getResources().getString(R.string.admob_interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                // The mInterstitialAd reference will be null until
-                // an ad is loaded.
                 mInterstitialAd = interstitialAd;
-                Log.i("AdMob", "onAdLoaded");
-                //FullScreenContentCallback
                 mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
                     @Override
                     public void onAdDismissedFullScreenContent() {
-                        // Called when fullscreen content is dismissed.
-                        Log.d("TAG", "The ad was dismissed.");
+
                     }
 
                     @Override
                     public void onAdFailedToShowFullScreenContent(AdError adError) {
-                        // Called when fullscreen content failed to show.
-                        Log.d("TAG", "The ad failed to show.");
+
                     }
 
                     @Override
                     public void onAdShowedFullScreenContent() {
-                        // Called when fullscreen content is shown.
-                        // Make sure to set your reference to null so you don't
-                        // show it a second time.
                         mInterstitialAd = null;
-                        Log.d("TAG", "The ad was shown.");
                     }
                 });
             }
 
             @Override
             public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                // Handle the error
-                Log.i("AdMob", loadAdError.getMessage());
                 mInterstitialAd = null;
             }
         });

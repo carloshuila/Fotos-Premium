@@ -51,19 +51,12 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
 
         Glide.with(micontext).load(listaCategorias.get(position).getImagen()).into(holder.imgCategoria);
 
-        //Agregar click Listener
         holder.cardViewCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.d("entroooo", "entrroooo  desde el Home Latinas");
-                Log.d("nombre categoriaaaa",listaCategorias.get(position).nombre );
                 final  String nombreCategoria = listaCategorias.get(position).nombre;
-
                 Intent intent = new Intent(micontext, ListarPersonaActivity.class);
                 intent.putExtra("nombreCategoria", nombreCategoria);
-
-                //Iniciamos la Activity
                 micontext.startActivity(intent);
 
             }
@@ -99,16 +92,10 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
 
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("Personas", document.getId() + " => " + document.getData());
-                            Log.d("entro","entrooo Home Recomendados");
                             Persona persona = document.toObject(Persona.class);
-                         //  listaPersonasCateria.add(persona);
                             ArrayPersonas.add(persona);
                         }
-                    } else {
-                        Log.w("Error", "Erroooooor getting documents.", task.getException());
                     }
-
                 });
     }
 

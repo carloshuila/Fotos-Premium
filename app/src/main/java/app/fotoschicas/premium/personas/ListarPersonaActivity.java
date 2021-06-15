@@ -36,8 +36,8 @@ import app.fotoschicas.premium.categorias.ListarCategoriasActivity;
 
 public class ListarPersonaActivity extends AppCompatActivity {
 
-    ArrayList<Persona> listaPersonas = new ArrayList<>();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ArrayList<Persona> listaPersonas;
+    FirebaseFirestore db ;
     private ImageButton btnAtras;
     private AdView mAdView; //Google AdMob
     private AdView mAdView2; //Google AdMob
@@ -47,6 +47,9 @@ public class ListarPersonaActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        listaPersonas = new ArrayList<>();
+        db  = FirebaseFirestore.getInstance();
+
         setContentView(R.layout.activity_listar_personas);
         toolbar_title=(TextView)findViewById(R.id.toolbar_title);
         EnviarListarRecyclerView(listaPersonas);
@@ -88,7 +91,6 @@ public class ListarPersonaActivity extends AppCompatActivity {
         String  nombreCategoria = getIntent().getStringExtra("nombreCategoria");
         toolbar_title.setText(nombreCategoria);
 
-        Log.d("entroooo listar persona", nombreCategoria);
 
         db.collection("personas").whereEqualTo("categoria", nombreCategoria )
                 .get()
@@ -97,13 +99,10 @@ public class ListarPersonaActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                //  Log.d("Personas", document.getId() + " => " + document.getData());
                                 Persona persona = document.toObject(Persona.class);
                                 listaPersonas.add(persona);
                                 EnviarListarRecyclerView(listaPersonas);
                             }
-                        } else {
-                            Log.w("Erorrrrr", "Error getting documents.", task.getException());
                         }
                     }
                 });
@@ -135,9 +134,6 @@ public class ListarPersonaActivity extends AppCompatActivity {
 
         });
         //Fin barra navegacion
-
-
-
 
     }
     public void  EnviarListarRecyclerView( ArrayList<Persona> mispersonas){

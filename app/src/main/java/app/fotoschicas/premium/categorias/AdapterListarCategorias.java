@@ -45,19 +45,13 @@ public class AdapterListarCategorias  extends RecyclerView.Adapter<AdapterListar
             holder.nombreCategoria.setText((listaCategorias.get(position).getNombre()));
             Glide.with(micontext).load(listaCategorias.get(position).getImagen()).into(holder.imgCategoria);
 
-            //Agregar click Listener
             holder.cardViewCategoria.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Log.d("entroooo pyebassss", "entrroooo puebaaa adapter listar categoria");
-
-                    Log.d("nombre categoriaaaa",listaCategorias.get(position).nombre );
                     final  String nombreCategoria = listaCategorias.get(position).nombre;
 
                     Intent intent = new Intent(micontext, ListarPersonaActivity.class);
                     intent.putExtra("nombreCategoria", nombreCategoria);
-                    //Iniciamos la Activity
                     micontext.startActivity(intent);
                 }
             });

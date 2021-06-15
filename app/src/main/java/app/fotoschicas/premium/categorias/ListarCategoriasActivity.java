@@ -37,8 +37,8 @@ import app.fotoschicas.premium.MainActivity;
 import app.fotoschicas.premium.R;
 
 public class ListarCategoriasActivity extends AppCompatActivity {
-    ArrayList<Categoria> listaCategorias = new ArrayList<>();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ArrayList<Categoria> listaCategorias;
+    FirebaseFirestore db;
     private ImageButton btnAtras;
     private AdView mAdView; //Google AdMob
     private AdView mAdView2; //Google AdMob
@@ -47,6 +47,8 @@ public class ListarCategoriasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        listaCategorias = new ArrayList<>();
+        db  = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_listar_categorias);
         EnviarListarRecyclerView(listaCategorias);
 
@@ -74,11 +76,11 @@ public class ListarCategoriasActivity extends AppCompatActivity {
         //boton atras
         btnAtras = (ImageButton) findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            onBackPressed();
-                                        }
-                                    }
+            @Override
+                public void onClick(View v) {
+                onBackPressed();
+            }
+            }
         );
 
        //Barra navegacion
@@ -114,13 +116,10 @@ public class ListarCategoriasActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                               // Log.d("Categorias", document.getId() + " => " + document.getData());
                                 Categoria categoria = document.toObject(Categoria.class);
                                 listaCategorias.add(categoria);
                                 EnviarListarRecyclerView(listaCategorias);
                             }
-                        } else {
-                            Log.w("Erorrrrr", "Error getting documents.", task.getException());
                         }
                     }
                 });

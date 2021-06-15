@@ -32,7 +32,7 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHo
         listapersonas = listaPersonas;
     }
 
-    public List<Persona> getListapersonas() {
+    public ArrayList<Persona> getListapersonas() {
         return listapersonas;
     }
 
@@ -54,27 +54,18 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-        //holder.nombrePersona.setText((listapersonas.get(position).getNombre()));
         Glide.with(micontext).load(listapersonas.get(position).getImagen()).into(holder.imgPersona);
 
         final Persona persona = listapersonas.get(position);
 
-        //Agregar click Listener
+
         holder.cardViewPersona.setOnClickListener((v) -> {
 
             Intent intent = new Intent(micontext, VerPersonaActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("persona", persona);
-          //  Log.d("Nombreeeeee",persona.getNombre().toString() );
-           // Log.d("Nombreeeeee",persona.getCategoria().toString() );
-
-            //pasamos el objeto a la activity
             intent.putExtras(bundle);
-
-            //Iniciamos la Activity
             micontext.startActivity(intent);
-
-
         });
 
     }
@@ -86,14 +77,12 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.MyViewHo
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        //TextView nombrePersona;
         ImageView imgPersona;
         CardView cardViewPersona;
 
         public MyViewHolder(View itemView){
             super(itemView);
 
-           // nombrePersona = (TextView) itemView.findViewById(R.id.id_persona_nombre);
             imgPersona = (ImageView) itemView.findViewById(R.id.id_persona_img);
             cardViewPersona = (CardView) itemView.findViewById(R.id.id_cardViewPersona);
         }

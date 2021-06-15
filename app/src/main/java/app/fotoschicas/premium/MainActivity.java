@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView2; //Google AdMob
     private int numeroAleatorio;
 
-    public FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public FirebaseFirestore db ;
     private ImageButton btnAtras;
 
 
@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db  = FirebaseFirestore.getInstance();
+
         //API Goolge AdmOB
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -109,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
         EnviarListarRecyclerViewRecomendados(listaRecomendados);
         mostrarCategorias();
         numeroAleatorio = (int) (Math.random()*6+1);
-        Log.w("aleatorioooo", Integer.toString(numeroAleatorio));
         switch (numeroAleatorio){
             case 1:
                 verPersonasCategoria(getResources().getString(R.string.categoria_1));
@@ -195,16 +196,11 @@ public class MainActivity extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("Categorias", document.getId() + " => " + document.getData());
-                            Log.d("entro","entrooo  Homme Categorias");
                             Categoria categoria = document.toObject(Categoria.class);
                             listaCategorias.add(categoria);
                             EnviarListarRecyclerView_CategoriasHome(listaCategorias);
                         }
-                    } else {
-                        Log.w("Error", "Erroooooor getting documents.", task.getException());
                     }
-
                 });
     }
 
@@ -215,16 +211,11 @@ public class MainActivity extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("Personas", document.getId() + " => " + document.getData());
-                            Log.d("entro","entrooo Home Recomendados");
                             Persona persona = document.toObject(Persona.class);
                             listaRecomendados.add(persona);
                             EnviarListarRecyclerViewRecomendados(listaRecomendados);
                         }
-                    } else {
-                        Log.w("Error", "Erroooooor getting documents.", task.getException());
                     }
-
                 });
     }
 
@@ -236,13 +227,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                //  Log.d("Personas", document.getId() + " => " + document.getData());
                                 Persona persona = document.toObject(Persona.class);
                                 listaRecomendados.add(persona);
                                 EnviarListarRecyclerViewRecomendados(listaRecomendados);
                             }
-                        } else {
-                            Log.w("Erorrrrr", "Error getting documents.", task.getException());
                         }
                     }
                 });
