@@ -1,38 +1,12 @@
 package app.fotoschicas.premium;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.IntentSender;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.UserHandle;
-import android.util.Log;
-import android.view.Display;
-import android.view.View;
-import android.widget.ImageButton;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -41,43 +15,27 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import app.fotoschicas.premium.categorias.AdapterCategoria;
 import app.fotoschicas.premium.categorias.ListarCategoriasActivity;
 import app.fotoschicas.premium.recomendado.AdapterRecomendado;
 import app.fotoschicas.premium.categorias.Categoria;
 import app.fotoschicas.premium.personas.Persona;
-import app.fotoschicas.premium.personas.ListarPersonaActivity;
 //API Goolge AdmOB
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.core.OrderBy;
+
 
 public class MainActivity extends AppCompatActivity {
 
     public ArrayList<Categoria> listaCategorias = new ArrayList<>();
     public ArrayList<Persona> listaRecomendados = new ArrayList<>();
-    public ArrayList<Persona> listaPersonas = new ArrayList<>();
-    private AdView mAdView; //Google AdMob
-    private AdView mAdView2; //Google AdMob
-    private int numeroAleatorio;
 
     public FirebaseFirestore db ;
-    private ImageButton btnAtras;
 
 
     @Override
@@ -85,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db  = FirebaseFirestore.getInstance();
+
 
         //API Goolge AdmOB
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -96,21 +55,18 @@ public class MainActivity extends AppCompatActivity {
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
         adView.setAdUnitId(getResources().getString(R.string.admob_banner_ad1));
-        mAdView = findViewById(R.id.ads_banner_home1);
+        //Google AdMob
+        AdView mAdView = findViewById(R.id.ads_banner_home1);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        AdView adView2 = new AdView(this);
-        adView2.setAdSize(AdSize.BANNER);
-        adView2.setAdUnitId(getResources().getString(R.string.admob_banner_ad2));
-        mAdView2 = findViewById(R.id.ads_banner_home2);
-        mAdView2.loadAd(adRequest);
         //Fin API Goolge AdmOB
+
 
         EnviarListarRecyclerView_CategoriasHome(listaCategorias);
         EnviarListarRecyclerViewRecomendados(listaRecomendados);
         mostrarCategorias();
-        numeroAleatorio = (int) (Math.random()*6+1);
+        int numeroAleatorio = (int) (Math.random() * 6 + 1);
         switch (numeroAleatorio){
             case 1:
                 verPersonasCategoria(getResources().getString(R.string.categoria_1));
@@ -131,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                 verPersonasCategoria(getResources().getString(R.string.categoria_6));
                 break;
             case 7:
+                verPersonasCategoria(getResources().getString(R.string.categoria_7));
+                break;
+            case 8:
+                verPersonasCategoria(getResources().getString(R.string.categoria_8));
+                break;
+            case 9:
                 verPersonasTodas();
                 break;
             default:
@@ -163,11 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-    }
-
-    public void vercategorias(View view) {
-        Intent intent = new Intent(this, ListarPersonaActivity.class);
-        startActivity(intent);
     }
 
 

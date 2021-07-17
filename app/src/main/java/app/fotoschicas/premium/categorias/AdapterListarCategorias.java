@@ -2,7 +2,6 @@ package app.fotoschicas.premium.categorias;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import app.fotoschicas.premium.R;
 import app.fotoschicas.premium.personas.ListarPersonaActivity;
@@ -45,15 +43,12 @@ public class AdapterListarCategorias  extends RecyclerView.Adapter<AdapterListar
             holder.nombreCategoria.setText((listaCategorias.get(position).getNombre()));
             Glide.with(micontext).load(listaCategorias.get(position).getImagen()).into(holder.imgCategoria);
 
-            holder.cardViewCategoria.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final  String nombreCategoria = listaCategorias.get(position).nombre;
+            holder.cardViewCategoria.setOnClickListener(v -> {
+                final  String nombreCategoria = listaCategorias.get(position).nombre;
 
-                    Intent intent = new Intent(micontext, ListarPersonaActivity.class);
-                    intent.putExtra("nombreCategoria", nombreCategoria);
-                    micontext.startActivity(intent);
-                }
+                Intent intent = new Intent(micontext, ListarPersonaActivity.class);
+                intent.putExtra("nombreCategoria", nombreCategoria);
+                micontext.startActivity(intent);
             });
 
 

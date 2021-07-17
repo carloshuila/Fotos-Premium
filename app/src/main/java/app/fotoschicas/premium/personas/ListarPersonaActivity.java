@@ -2,9 +2,6 @@ package app.fotoschicas.premium.personas;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -13,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -28,7 +24,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import app.fotoschicas.premium.MainActivity;
 import app.fotoschicas.premium.R;
@@ -38,10 +33,6 @@ public class ListarPersonaActivity extends AppCompatActivity {
 
     ArrayList<Persona> listaPersonas;
     FirebaseFirestore db ;
-    private ImageButton btnAtras;
-    private AdView mAdView; //Google AdMob
-    private AdView mAdView2; //Google AdMob
-    private TextView toolbar_title;
 
 
     @Override
@@ -51,10 +42,10 @@ public class ListarPersonaActivity extends AppCompatActivity {
         db  = FirebaseFirestore.getInstance();
 
         setContentView(R.layout.activity_listar_personas);
-        toolbar_title=(TextView)findViewById(R.id.toolbar_title);
+        TextView toolbar_title = (TextView) findViewById(R.id.toolbar_title);
         EnviarListarRecyclerView(listaPersonas);
 
-       //API Goolge AdmOB
+        //API Goolge AdMob
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -63,30 +54,18 @@ public class ListarPersonaActivity extends AppCompatActivity {
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
         adView.setAdUnitId(getResources().getString(R.string.admob_banner_ad1));
-        mAdView = findViewById(R.id.ads_banner_personaLista1);
+        //Google AdMob
+        AdView mAdView = findViewById(R.id.ads_banner_personaLista1);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-
-        AdView adView2 = new AdView(this);
-        adView2.setAdSize(AdSize.BANNER);
-        adView2.setAdUnitId(getResources().getString(R.string.admob_banner_ad2));
-        mAdView2 = findViewById(R.id.ads_banner_personaLista2);
-        mAdView2.loadAd(adRequest);
-        //Fin API Goolge AdMob
+        //API Goolge AdMob
 
 
 
 
         //boton atras
-        btnAtras = (ImageButton) findViewById(R.id.btnAtras);
-        btnAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        }
-        );
+        ImageButton btnAtras = (ImageButton) findViewById(R.id.btnAtras);
+        btnAtras.setOnClickListener(v -> onBackPressed());
         //Recibir datos
         String  nombreCategoria = getIntent().getStringExtra("nombreCategoria");
         toolbar_title.setText(nombreCategoria);
@@ -139,7 +118,7 @@ public class ListarPersonaActivity extends AppCompatActivity {
     public void  EnviarListarRecyclerView( ArrayList<Persona> mispersonas){
         RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerView_persona);
         AdapterPersona MyAdapter = new AdapterPersona(this,mispersonas);
-        myRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        myRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         myRecyclerView.setAdapter(MyAdapter);
     }
 }

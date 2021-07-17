@@ -9,44 +9,6 @@
     android:orientation="vertical"
     android:weightSum="2">
 
-    <!--- Inicio Barra Toolbar-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_verPersona"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorOnPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/titulo_barra_ver_persona"
-                android:layout_gravity="center"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:id="@+id/toolbar_title" />
-            <ImageButton
-                android:id="@+id/btnAtras"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="?attr/actionModeCloseDrawable" />
-        </androidx.appcompat.widget.Toolbar>
-    </LinearLayout>
-    <!--- Fin Toolbar-->
     <LinearLayout
         android:id="@+id/contenedor_PrincipalPersona"
         android:layout_width="match_parent"
@@ -65,20 +27,6 @@
             android:isScrollContainer="true"
             android:orientation="vertical"
             android:scrollbars="horizontal">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="5dp">
-
-                <com.google.android.gms.ads.AdView
-                    android:id="@+id/ads_banner_verPersona1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    app:adSize="BANNER"
-                    app:adUnitId="@string/admob_banner_ad1" />
-            </RelativeLayout>
-
 
             <LinearLayout
                 android:id="@+id/sun_contenedor_imgPersona"
@@ -95,6 +43,7 @@
                     android:background="@color/white"
                     android:orientation="vertical">
 
+
                     <com.github.chrisbanes.photoview.PhotoView
                         android:id="@+id/id_imagen_persona_Act"
                         android:layout_width="match_parent"
@@ -103,6 +52,29 @@
                         android:scaleType="center"
                         app:layout_constraintStart_toStartOf="parent">
                     </com.github.chrisbanes.photoview.PhotoView>
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:text="@string/titulo_barra_ver_persona"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btnAtras"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_atras_blanco" />
 
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton

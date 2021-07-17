@@ -2,7 +2,6 @@ package app.fotoschicas.premium.personas;
 
 import android.Manifest;
 import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaScannerConnection;
@@ -10,10 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.textclassifier.TextLinks;
 import android.webkit.CookieManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -47,21 +42,12 @@ public class VerPersonaActivity extends AppCompatActivity {
 
     private InterstitialAd mInterstitialAd;//Google AdMob
 
-    private TextView tvNombre;
-    private PhotoView ivImagen;
-    private Context micontext;
-    private ImageButton btnDescargarImg;
-    private ImageButton btnAtras;
     private String url_Imagen;
 
     String nombreImagen;
 
     FirebaseFirestore db;
     Persona persona = null;
-    public  String num;
-    private AdView mAdView; //Google AdMob
-    private AdView mAdView2; //Google AdMob
-    private TextView toolbar_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,34 +55,29 @@ public class VerPersonaActivity extends AppCompatActivity {
         nombreImagen = "nombreImagen";
         db  = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_ver_persona);
-        toolbar_title=(TextView)findViewById(R.id.toolbar_title);
+        TextView toolbar_title = (TextView) findViewById(R.id.toolbar_title);
         isStoragePermissionGranted();
 
 
-       //API Goolge AdmOB
+        //API Goolge AdmOB
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        //Banner Superior
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId(getResources().getString(R.string.admob_banner_ad1));
-        mAdView = findViewById(R.id.ads_banner_verPersona1);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
         ///Banner Inferior
         AdView adView2 = new AdView(this);
         adView2.setAdSize(AdSize.BANNER);
         adView2.setAdUnitId(getResources().getString(R.string.admob_banner_ad2));
-        mAdView2 = findViewById(R.id.ads_banner_verPersona2);
+        //Google AdMob
+        AdView mAdView2 = findViewById(R.id.ads_banner_verPersona2);
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView2.loadAd(adRequest);
 
         anuncioIntersticial(adRequest);
         //Fin API Goolge AdmOB
 
-        ivImagen = (PhotoView) findViewById(R.id.id_imagen_persona_Act);
+        PhotoView ivImagen = (PhotoView) findViewById(R.id.id_imagen_persona_Act);
         //Recibir datos
         Bundle personaEnviado = getIntent().getExtras();
         if (personaEnviado != null){
@@ -112,28 +93,19 @@ public class VerPersonaActivity extends AppCompatActivity {
 
         }
         FloatingActionButton btnDescargar = findViewById(R.id.floating_btn_descargar);
-        btnDescargar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               if (mInterstitialAd != null) {
-                    mInterstitialAd.show(VerPersonaActivity.this);
-                }
-                startDownload(url_Imagen);
+        btnDescargar.setOnClickListener(v -> {
+           if (mInterstitialAd != null) {
+                mInterstitialAd.show(VerPersonaActivity.this);
             }
+            startDownload(url_Imagen);
         });
 
         //boton atras
-        btnAtras = (ImageButton) findViewById(R.id.btnAtras);
-        btnAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        ImageButton btnAtras = (ImageButton) findViewById(R.id.btnAtras);
+        btnAtras.setOnClickListener(v -> onBackPressed());
     }
 
     public void startDownload(String url_img) {
-        Toast Toast = new Toast(this);
         Toast makeText = Toast.makeText(this, getResources().getString(R.string.inicio_descarga), Toast.LENGTH_SHORT);
         makeText.show();
 

@@ -2,7 +2,6 @@ package app.fotoschicas.premium.categorias;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,7 @@ import app.fotoschicas.premium.personas.Persona;
 public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyViewHolder> {
 
     public Context micontext;
-    private ArrayList<Categoria> listaCategorias = new ArrayList<>();
+    private final ArrayList<Categoria> listaCategorias;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public AdapterCategoria(Context micontext, ArrayList<Categoria> listaCategorias) {
@@ -51,15 +50,12 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
 
         Glide.with(micontext).load(listaCategorias.get(position).getImagen()).into(holder.imgCategoria);
 
-        holder.cardViewCategoria.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final  String nombreCategoria = listaCategorias.get(position).nombre;
-                Intent intent = new Intent(micontext, ListarPersonaActivity.class);
-                intent.putExtra("nombreCategoria", nombreCategoria);
-                micontext.startActivity(intent);
+        holder.cardViewCategoria.setOnClickListener(v -> {
+            final  String nombreCategoria = listaCategorias.get(position).nombre;
+            Intent intent = new Intent(micontext, ListarPersonaActivity.class);
+            intent.putExtra("nombreCategoria", nombreCategoria);
+            micontext.startActivity(intent);
 
-            }
         });
 
 

@@ -1,16 +1,9 @@
 package app.fotoschicas.premium.categorias;
 
-import android.content.ClipData;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +24,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import app.fotoschicas.premium.MainActivity;
 import app.fotoschicas.premium.R;
@@ -39,9 +31,6 @@ import app.fotoschicas.premium.R;
 public class ListarCategoriasActivity extends AppCompatActivity {
     ArrayList<Categoria> listaCategorias;
     FirebaseFirestore db;
-    private ImageButton btnAtras;
-    private AdView mAdView; //Google AdMob
-    private AdView mAdView2; //Google AdMob
 
 
     @Override
@@ -58,30 +47,19 @@ public class ListarCategoriasActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId(getResources().getString(R.string.admob_banner_ad1));
-        mAdView = findViewById(R.id.ads_banner_categoria1);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
 
         AdView adView2 = new AdView(this);
         adView2.setAdSize(AdSize.BANNER);
         adView2.setAdUnitId(getResources().getString(R.string.admob_banner_ad2));
-        mAdView2 = findViewById(R.id.ads_banner_categoria2);
+        //Google AdMob
+        AdView mAdView2 = findViewById(R.id.ads_banner_categoria2);
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView2.loadAd(adRequest);
-        //Fin API Goolge AdmOB
+        //Fin API Goolge AdMob
 
         //boton atras
-        btnAtras = (ImageButton) findViewById(R.id.btnAtras);
-        btnAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-                public void onClick(View v) {
-                onBackPressed();
-            }
-            }
-        );
+        ImageButton btnAtras = (ImageButton) findViewById(R.id.btnAtras);
+        btnAtras.setOnClickListener(v -> onBackPressed());
 
        //Barra navegacion
         BottomNavigationView navBar = findViewById(R.id.btnBarraNav);

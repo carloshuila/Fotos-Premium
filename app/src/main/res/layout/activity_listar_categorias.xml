@@ -66,26 +66,12 @@
             android:isScrollContainer="true"
             android:orientation="vertical"
             android:scrollbars="horizontal">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="0dp">
-
-                <com.google.android.gms.ads.AdView
-                    android:id="@+id/ads_banner_categoria1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    app:adSize="BANNER"
-                    app:adUnitId="@string/admob_banner_ad1" />
-            </RelativeLayout>
-
 
             <LinearLayout
                 android:id="@+id/sun_contenedor_list_categoria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="0dp">
                 <RelativeLayout
                     android:id="@+id/contenedorCategorias"
                     android:layout_width="0dp"

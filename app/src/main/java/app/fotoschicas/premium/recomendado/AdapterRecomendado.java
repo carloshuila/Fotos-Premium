@@ -3,7 +3,6 @@ package app.fotoschicas.premium.recomendado;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import app.fotoschicas.premium.R;
 import app.fotoschicas.premium.personas.Persona;
@@ -25,9 +22,8 @@ import app.fotoschicas.premium.personas.VerPersonaActivity;
 
 public class AdapterRecomendado extends RecyclerView.Adapter<AdapterRecomendado.MyViewHolder> {
 
-    private Context micontext;
-    private ArrayList<Persona> listapersonas;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final Context micontext;
+    private final ArrayList<Persona> listapersonas;
 
 
     public AdapterRecomendado(Context micontext, ArrayList<Persona> listaPersonas) {
@@ -58,7 +54,6 @@ public class AdapterRecomendado extends RecyclerView.Adapter<AdapterRecomendado.
             Intent intent = new Intent(micontext, VerPersonaActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("persona", persona);
-            Log.d("NombreeeeeeRecoendado",persona.getNombre().toString() );
 
             //pasamos el objeto a la activity
             intent.putExtras(bundle);
